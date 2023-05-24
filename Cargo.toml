@@ -1,0 +1,31 @@
+[package]
+name = "aurora-alert-api"
+version = "0.1.0"
+edition = "2021"
+authors = ["Michael Freeborn"]
+
+[dependencies]
+anyhow = "1.0.71"
+axum = { version = "0.6.18", default-features = false }
+chrono = { version = "0.4.24", default-features = false, features = ["serde"] }
+config = { version = "0.13.3", features = ["toml"], default-features = false }
+derive_more = { version = "0.99.17", default-features = false, features = ["display"] }
+lettre = { version = "0.10.4", default-features = false, features = ["builder", "smtp-transport", "tokio1-rustls-tls"] }
+quick-xml = { version = "0.28.2", features = ["serialize"] }
+reqwest = { version = "0.11.17", default-features = false, features = ["json", "rustls-tls"] }
+serde = { version = "1.0.162", features = ["derive"], default-features = false }
+sqlx = { version = "0.6.3", default-features = false, features = ["chrono", "postgres", "runtime-tokio-rustls", "macros"] }
+strum = "0.24.1"
+strum_macros = "0.24.3"
+tera = { version = "1.18.1", default-features = false }
+thiserror = "1.0.40"
+tokio = { version = "1.28.0", default-features = false, features = ["macros", "rt"] }
+tracing = "0.1.37"
+tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
+
+[profile.release]
+panic = "abort"
+lto = true
+
+[profile.dev.package.sqlx-macros]
+opt-level = 3
